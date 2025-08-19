@@ -23,7 +23,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Create necessary directories
-RUN mkdir -p /app/media /app/staticfiles /app/logs
+RUN mkdir -p /app/media /app/staticfiles /app/logs /app/static
+
+# Make startup script executable
+RUN chmod +x start.sh
 
 # Collect static files
 RUN python manage.py collectstatic --noinput
@@ -31,5 +34,5 @@ RUN python manage.py collectstatic --noinput
 # Expose port
 EXPOSE 8000
 
-# Run the application
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"] 
+# Run the application with proper port binding for Render
+CMD ["./start.sh"] 

@@ -15,7 +15,7 @@ SECRET_KEY = config('SECRET_KEY', default='django-insecure-cuw8b95y$==pjsl#1pt9j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1').split(',')
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1,demo-backend-waea.onrender.com').split(',')
 
 # Application definition
 INSTALLED_APPS = [
@@ -127,7 +127,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = config('STATIC_URL', default='/static/')
 STATIC_ROOT = BASE_DIR / config('STATIC_ROOT', default='staticfiles')
-STATICFILES_DIRS = [BASE_DIR / 'static']
+# Only include static directory if it exists
+STATICFILES_DIRS = [BASE_DIR / 'static'] if (BASE_DIR / 'static').exists() else []
 
 # Media files
 MEDIA_URL = config('MEDIA_URL', default='/media/')
@@ -175,9 +176,9 @@ SIMPLE_JWT = {
 }
 
 # CORS Settings
-CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', default='http://localhost:3000,http://localhost:3001,http://127.0.0.1:3000,http://127.0.0.1:3001').split(',')
+CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', default='http://localhost:3000,http://localhost:3001,http://127.0.0.1:3000,http://127.0.0.1:3001,https://crm-jewel.vercel.app').split(',')
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_ALL_ORIGINS = True  # For development only
+CORS_ALLOW_ALL_ORIGINS = config('DEBUG', default=True, cast=bool)  # Only allow all origins in development
 
 # WhatsApp Integration (WAHA)
 WAHA_BASE_URL = config('WAHA_BASE_URL', default='http://localhost:3001')
@@ -215,7 +216,7 @@ CORS_EXPOSE_HEADERS = [
 ]
 
 # CSRF Settings
-CSRF_TRUSTED_ORIGINS = config('CSRF_TRUSTED_ORIGINS', default='http://localhost:3000,http://localhost:3001,http://127.0.0.1:3000,http://127.0.0.1:3001').split(',')
+CSRF_TRUSTED_ORIGINS = config('CSRF_TRUSTED_ORIGINS', default='http://localhost:3000,http://localhost:3001,http://127.0.0.1:3000,http://127.0.0.1:3001,https://crm-jewel.vercel.app').split(',')
 
 # Email Configuration
 EMAIL_BACKEND = config('EMAIL_BACKEND', default='django.core.mail.backends.console.EmailBackend')

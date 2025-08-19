@@ -5,9 +5,17 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.http import JsonResponse
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
 
+def health_check(request):
+    return JsonResponse({"status": "healthy", "message": "Jewellery CRM Backend is running"})
+
 urlpatterns = [
+    # Health check endpoint
+    path('', health_check, name='health_check'),
+    path('health/', health_check, name='health_check_alt'),
+    
     path('admin/', admin.site.urls),
     
     # API Documentation
