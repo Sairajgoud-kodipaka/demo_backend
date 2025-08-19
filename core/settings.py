@@ -13,10 +13,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY', default='django-insecure-cuw8b95y$==pjsl#1pt9jgg#+ot$%)a-9ra2zay3+1=hov81g9')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=True, cast=bool)
+DEBUG = config('DEBUG', default=False, cast=bool)
 
-# Allow any Render subdomain for flexibility
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1,.onrender.com,demo-backend-cdi8.onrender.com').split(',')
+# Force ALLOWED_HOSTS for production - bypass environment variable issues
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    '.onrender.com',
+    'demo-backend-cdi8.onrender.com',
+]
 
 # Application definition
 INSTALLED_APPS = [
