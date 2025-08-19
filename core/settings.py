@@ -16,7 +16,14 @@ SECRET_KEY = config('SECRET_KEY', default='django-insecure-cuw8b95y$==pjsl#1pt9j
 DEBUG = config('DEBUG', default=True, cast=bool)
 
 # Allow any Render subdomain for flexibility
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1,.onrender.com').split(',')
+ALLOWED_HOSTS_CONFIG = config('ALLOWED_HOSTS', default='localhost,127.0.0.1,.onrender.com,demo-backend-cdi8.onrender.com')
+ALLOWED_HOSTS = ALLOWED_HOSTS_CONFIG.split(',')
+
+# Debug logging for ALLOWED_HOSTS
+print(f"DEBUG: ALLOWED_HOSTS_CONFIG = {ALLOWED_HOSTS_CONFIG}")
+print(f"DEBUG: ALLOWED_HOSTS = {ALLOWED_HOSTS}")
+print(f"DEBUG: SECRET_KEY = {SECRET_KEY[:20]}...")
+print(f"DEBUG: DEBUG = {DEBUG}")
 
 # Application definition
 INSTALLED_APPS = [
