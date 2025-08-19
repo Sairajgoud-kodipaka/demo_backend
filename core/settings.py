@@ -131,7 +131,7 @@ STATIC_ROOT = BASE_DIR / config('STATIC_ROOT', default='staticfiles')
 STATICFILES_DIRS = [BASE_DIR / 'static'] if (BASE_DIR / 'static').exists() else []
 
 # WhiteNoise Configuration for Production
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 # Media files
 MEDIA_URL = config('MEDIA_URL', default='/media/')
